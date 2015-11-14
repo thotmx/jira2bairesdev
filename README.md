@@ -17,7 +17,7 @@ Add your configuration options.
 
 Download the .xls from JIRA and put them into the directory that you set on the config.yml file.
 
-**Nota**: Be careful about not repeating the files because currently avoiding duplicates is not supported yet.
+**Important**: Be careful about not repeating the files because currently avoiding duplicates is not supported yet.
 
 Then run and let the magic happens.
 
