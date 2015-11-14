@@ -1,0 +1,3 @@
+user: My.User 
+password: MyPassword 
+directory: /my/directory/with/excels/exported/from/jira 
