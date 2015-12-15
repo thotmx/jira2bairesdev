@@ -35,3 +35,8 @@ build/
 .rvmrc
 
 config.yml
+
+
+# Timesheets
+*.finished
+*.xls
