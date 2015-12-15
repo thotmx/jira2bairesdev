@@ -21,7 +21,16 @@ end
 def worked_hours(file)
   xls = Roo::Spreadsheet.open(file)
   sheet = xls.sheet("Worklogs")
-  sheet.parse(date: /Work date/, hours: /Hours/, description: /Work Description/)
+  sheet.parse(
+    date: /Work date/,
+    hours: /Hours/,
+    description: /Work Description/,
+    summary: /Issue summary/
+  )
+end
+
+def work_description(report)
+  "#{report[:summary]}: #{report[:description]}"
 end
 
 Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
@@ -36,7 +45,7 @@ Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
     browser.select_list(id: "ctl00_ContentPlaceHolder_idProyectoDropDownList").select("iSeatz - iSeatz")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idTipoAsignacionDropDownList").select("Software Development")
     browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
-    browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set report[:description]
+    browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report)
     browser.button(id: "ctl00_ContentPlaceHolder_btnAceptar").click
   end
   puts "-"*50
