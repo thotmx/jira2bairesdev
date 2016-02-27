@@ -12,7 +12,7 @@ browser.text_field(id: "ctl00_ContentPlaceHolder_PasswordTextBox").set config["p
 
 browser.button(id: "ctl00_ContentPlaceHolder_LoginButton").click
 
-if browser.text.include? "Bienvenido(a)"
+if browser.text.include? "Welcome"
   puts "You're in!!!"
 else
   puts "Sorry"
@@ -29,8 +29,12 @@ def worked_hours(file)
   )
 end
 
-def work_description(report)
-  "#{report[:summary]}: #{report[:description]}"
+def work_description(report, config)
+  if config["add_issue_summary"]
+    "#{report[:summary]}: #{report[:description]}"
+  else
+    "#{report[:description]}"
+  end
 end
 
 Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
@@ -40,12 +44,13 @@ Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
   worked_hours(file).each do |report|
     next if report[:date].is_a? String
     next if report[:date].nil? 
-    browser.link(text: "Nuevo registro").click
+    browser.link(text: "New record").click
     browser.link(title: report[:date].strftime("%B %d")).click
     browser.select_list(id: "ctl00_ContentPlaceHolder_idProyectoDropDownList").select("iSeatz - iSeatz")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idTipoAsignacionDropDownList").select("Software Development")
     browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
-    browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report)
+    browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
+    browser.select_list(id: "ctl00_ContentPlaceHolder_idFocalPointClientDropDownList").select(config["focal_point"])
     browser.button(id: "ctl00_ContentPlaceHolder_btnAceptar").click
   end
   puts "-"*50

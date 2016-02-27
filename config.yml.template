@@ -1,3 +1,5 @@
 user: My.User 
 password: MyPassword 
 directory: /my/directory/with/excels/exported/from/jira 
+add_issue_summary: false
+focal_point: John Doe 
