@@ -45,7 +45,7 @@ Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
     next if report[:date].is_a? String
     next if report[:date].nil? 
     browser.link(text: "New record").click
-    browser.link(title: report[:date].strftime("%B %d")).click
+    browser.link(title: report[:date].strftime("%B %-d")).click
     browser.select_list(id: "ctl00_ContentPlaceHolder_idProyectoDropDownList").select("iSeatz - iSeatz")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idTipoAsignacionDropDownList").select("Software Development")
     browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
