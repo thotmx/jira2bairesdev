@@ -26,3 +26,9 @@ bundle exec ruby lib/run.rb
 ```
 
 This is a working first approach. There is a lot of work to improve it.
+
+## Was this project useful for you? ##
+
+How many hours have you saved?
+
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6BA845QGPDNS"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="[paypal]" /></a>
