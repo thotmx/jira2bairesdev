@@ -7,6 +7,8 @@ browser = Watir::Browser.new
 config = YAML.load(File.read("config.yml"))
 browser.goto "http://timetracker.bairesdev.com"
 
+puts "Visiting the site..."
+
 browser.text_field(id: "ctl00_ContentPlaceHolder_UserNameTextBox").set config["user"]
 browser.text_field(id: "ctl00_ContentPlaceHolder_PasswordTextBox").set config["password"]
 
@@ -44,13 +46,15 @@ Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
   worked_hours(file).each do |report|
     next if report[:date].is_a? String
     next if report[:date].nil? 
-    browser.link(text: "New record").click
-    browser.link(title: report[:date].strftime("%B %-d")).click
+    browser.link(text: "Track Hours").click
+    browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:date].strftime("%d/%m/%Y")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idProyectoDropDownList").select("iSeatz - iSeatz")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idTipoAsignacionDropDownList").select("Software Development")
     browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
     browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
+    sleep(1)
     browser.select_list(id: "ctl00_ContentPlaceHolder_idFocalPointClientDropDownList").select(config["focal_point"])
+    browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
     browser.button(id: "ctl00_ContentPlaceHolder_btnAceptar").click
   end
   puts "-"*50
