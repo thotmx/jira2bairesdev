@@ -47,14 +47,17 @@ Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
     next if report[:date].is_a? String
     next if report[:date].nil? 
     browser.link(text: "Track Hours").click
-    browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:date].strftime("%d/%m/%Y")
+    browser.text_field(id: "ctl00_ContentPlaceHolder_txtFrom").set report[:date].strftime("%d/%m/%Y")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idProyectoDropDownList").select("iSeatz - iSeatz")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idTipoAsignacionDropDownList").select("Software Development")
     browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
     browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
     sleep(1)
     browser.select_list(id: "ctl00_ContentPlaceHolder_idFocalPointClientDropDownList").select(config["focal_point"])
+    sleep(1)
     browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
+    browser.select_list(id: "ctl00_ContentPlaceHolder_idTipoAsignacionDropDownList").select("Software Development")
+    browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
     browser.button(id: "ctl00_ContentPlaceHolder_btnAceptar").click
   end
   puts "-"*50
