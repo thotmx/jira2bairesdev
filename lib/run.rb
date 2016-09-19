@@ -50,6 +50,7 @@ Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
     browser.text_field(id: "ctl00_ContentPlaceHolder_txtFrom").set report[:date].strftime("%d/%m/%Y")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idProyectoDropDownList").select("iSeatz - iSeatz")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idTipoAsignacionDropDownList").select("Software Development")
+    Watir::Wait.until { browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").exist? }  
     browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
     browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
     sleep(1)
