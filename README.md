@@ -27,6 +27,8 @@ bundle exec ruby lib/run.rb
 
 This is a working first approach. There is a lot of work to improve it.
 
+**Note about Tempo**: If you get a 500 error when exporting to Excel. One or more tickets have Anonymous or not Reporter assigned.
+
 ## Was this project useful for you? ##
 
 How many hours have you saved?
