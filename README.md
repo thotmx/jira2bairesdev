@@ -17,6 +17,25 @@ Add your configuration options.
 
 Download the .xls from JIRA and put them into the directory that you set on the config.yml file.
 
+## Using another browser
+
+Now, you can use chrome/chromium, just add another option to config.yml
+
+```
+  browser: chrome
+```
+
+### How to install it in Ubuntu
+
+```
+$ sudo apt install chromium-chromedriver
+```
+
+```
+sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/local/bin/chromedriver
+```
+
+
 **Important**: Be careful about not repeating the files because currently avoiding duplicates is not supported yet.
 
 Then run and let the magic happens.

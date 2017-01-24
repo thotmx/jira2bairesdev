@@ -2,9 +2,17 @@ require "watir-webdriver"
 require 'roo-xls'
 require "headless"
 
-browser = Watir::Browser.new
-
 config = YAML.load(File.read("config.yml"))
+
+browser = nil
+
+if config["browser"] == "chrome" 
+  browser = Watir::Browser.new :chrome
+else
+  browser = Watir::Browser.new
+end
+
+
 browser.goto "http://timetracker.bairesdev.com"
 
 puts "Visiting the site..."
