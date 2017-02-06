@@ -4,14 +4,12 @@ require "headless"
 
 config = YAML.load(File.read("config.yml"))
 
-browser = nil
-
-if config["browser"] == "chrome" 
-  browser = Watir::Browser.new :chrome
-else
+begin
+  browser = Watir::Browser.new config["browser"].to_sym
+rescue
+  puts "No valid browser in config file, using default"
   browser = Watir::Browser.new
 end
-
 
 browser.goto "http://timetracker.bairesdev.com"
 
