@@ -57,16 +57,16 @@ Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
     browser.link(text: "Track Hours").click
     browser.text_field(id: "ctl00_ContentPlaceHolder_txtFrom").set report[:date].strftime("%d/%m/%Y")
     browser.select_list(id: "ctl00_ContentPlaceHolder_idProyectoDropDownList").select("iSeatz - iSeatz")
-    browser.select_list(id: "ctl00_ContentPlaceHolder_idTipoAsignacionDropDownList").select("Software Development")
-    Watir::Wait.until { browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").exist? }  
-    browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
-    browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
     sleep(1)
     browser.select_list(id: "ctl00_ContentPlaceHolder_idFocalPointClientDropDownList").select(config["focal_point"])
     sleep(1)
-    browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
     browser.select_list(id: "ctl00_ContentPlaceHolder_idTipoAsignacionDropDownList").select("Software Development")
+    sleep(1)
+    Watir::Wait.until { browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").exist? }  
     browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
+    sleep(1)
+    browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
+    browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
     browser.button(id: "ctl00_ContentPlaceHolder_btnAceptar").click
   end
   puts "-"*50
