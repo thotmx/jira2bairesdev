@@ -64,6 +64,7 @@ Dir.glob(File.join(config["directory"], "*.xls")).each do |file|
     browser.text_field(id: "ctl00_ContentPlaceHolder_TiempoTextBox").set report[:hours]
     sleep(1)
     browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
+    sleep(1)
     browser.textarea(id: "ctl00_ContentPlaceHolder_DescripcionTextBox").set work_description(report, config)
     browser.button(id: "ctl00_ContentPlaceHolder_btnAceptar").click
   end
